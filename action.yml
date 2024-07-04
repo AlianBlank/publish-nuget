@@ -1,4 +1,4 @@
-name: Publish To NuGet
+name: PublishToNuGet.org
 author: R2 (@alianblank)
 description: Build, Pack & Publish a NuGet package with dotnet core on project version change
 
