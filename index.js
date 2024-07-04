@@ -45,7 +45,7 @@ class Action {
         this._executeInProcess(`git tag ${TAG}`)
         this._executeInProcess(`git push origin ${TAG}`)
 
-        process.stdout.write(`::set-output name=VERSION::${TAG}` + os.EOL)
+        process.stdout.write(`{name}=VERSION::${TAG} >> $GITHUB_OUTPUT` + os.EOL)
     }
 
     _pushPackage(version, name) {
@@ -78,12 +78,12 @@ class Action {
         const packageFilename = packages.filter(p => p.endsWith(".nupkg"))[0],
             symbolsFilename = packages.filter(p => p.endsWith(".snupkg"))[0]
 
-        process.stdout.write(`::set-output name=PACKAGE_NAME::${packageFilename}` + os.EOL)
-        process.stdout.write(`::set-output name=PACKAGE_PATH::${path.resolve(packageFilename)}` + os.EOL)
+        process.stdout.write(`{name}=PACKAGE_NAME::${packageFilename} >> $GITHUB_OUTPUT` + os.EOL)
+        process.stdout.write(`{name}=PACKAGE_PATH::${path.resolve(packageFilename)} >> $GITHUB_OUTPUT` + os.EOL)
 
         if (symbolsFilename) {
-            process.stdout.write(`::set-output name=SYMBOLS_PACKAGE_NAME::${symbolsFilename}` + os.EOL)
-            process.stdout.write(`::set-output name=SYMBOLS_PACKAGE_PATH::${path.resolve(symbolsFilename)}` + os.EOL)
+            process.stdout.write(`{name}=SYMBOLS_PACKAGE_NAME::${symbolsFilename} >> $GITHUB_OUTPUT` + os.EOL)
+            process.stdout.write(`{name}=SYMBOLS_PACKAGE_PATH::${path.resolve(symbolsFilename)} >> $GITHUB_OUTPUT` + os.EOL)
         }
 
         if (this.tagCommit)
