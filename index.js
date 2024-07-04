@@ -122,6 +122,7 @@ class Action {
             this._printErrorAndExit("project file not found")
 
         console.log(`Project Filepath: ${this.projectFile}`)
+        console.log(`Version Filepath: ${this.versionFile}`)
 
         if (!this.version) {
             if (this.versionFile !== this.projectFile && !fs.existsSync(this.versionFile))
